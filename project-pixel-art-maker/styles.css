@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono:400,700');
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Roboto Mono', monospace;
+    text-align: center;
+    background-color: #dfe0de;
+}
+
+h1 {
+    font-size: 70px;
+    margin: 0.1em;
+    font-weight: 700;
+    color: #eeaa7b;
+}
+
+h2 {
+    margin: 0.25em 0 0.25em;
+    color: #6689bf;
+}
+
+h2:first-of-type {
+    margin-top: 0.2em;
+}
+
+table,
+tr,
+td {
+    border: thin solid #000;
+    background-color: #fff;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+tr {
+    height: 21px;
+}
+
+td {
+    width: 21px;
+}
+
+input[type="color"] {
+    border-radius: 5px;
+    border: thin solid #333;
+    ;
+    outline: none;
+    width: 4em;
+}
+
+label {
+    font-family: inherit;
+    font-size: inherit;
+    color: #333;
+}
+
+.input {
+    width: 4em;
+    text-align: center;
+    border: none;
+    padding: 5px 5px 5px 5px;
+    display: inline-block;
+    border-radius: 5px;
+    background-color: #07889b;
+    color: #fff;
+    outline: none;
+    font-family: inherit;
+    font-size: inherit;
+}
+
+.toggle-grid {
+    border: hidden;
+}
+
+.canvas-wrapper {
+    display: inline-block;
+    margin-top: 15px;
+    -webkit-box-shadow: 0px 0px 21px 0px rgba(184, 184, 184, 1);
+    -moz-box-shadow: 0px 0px 21px 0px rgba(184, 184, 184, 1);
+    box-shadow: 0px 0px 21px 0px rgba(184, 184, 184, 1);
+}
+
+.btn {
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    cursor: pointer;
+    padding: 5px 16px;
+    display: inline-block;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+    outline: none;
+    border-radius: 5px;
+}
+
+.btn-primary {
+    color: #fff;
+    background: #07889b;
+}
+
+.btn-primary:active {
+    -webkit-box-shadow: 10px 10px 5px -3px rgba(196, 194, 196, 1);
+    -moz-box-shadow: 10px 10px 5px -3px rgba(196, 194, 196, 1);
+    box-shadow: 10px 10px 5px -3px rgba(196, 194, 196, 1);
+    transform: translateX(1%) translateY(1%);
+}
+
+.btn-innactive {
+    color: #fff;
+    background: #07889b;
+    cursor: unset;
+}
