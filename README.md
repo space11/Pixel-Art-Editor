@@ -16,3 +16,6 @@ Write JavaScript code that lets the user to create a grid of squares representin
 TODO :
 - [x] Style inputs
 - [x] Add _eraser_ functionality
+- [ ] Make functions responsible for one thing 
+- [ ] Allow user to paint instead of clcking each pixel
+- [ ] Re-write table creation function to use HTMLTableElement function
