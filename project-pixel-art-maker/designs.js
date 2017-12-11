@@ -5,7 +5,7 @@
   var DEBUG = true;
 
   var pixelColor = '#000'; // default pixel color is black
-  var gridTable = $('#pixel_canvas');
+  var gridTable = '#pixel_canvas';
 
   /**
    * @description Print debug to console
@@ -27,20 +27,37 @@
 
     var gridHeight = 0;
     var gridWidth = 0;
-    var newTable = '';
+    // var newTable = '';
 
-    removeCanvas();
+    removeCanvas(gridTable);
+
     gridHeight = $('#input_height').val();
     gridWidth = $('#input_width').val();
 
-    for (var x = 0; x < gridWidth; x++) {
-      newTable += '<tr>';
-      for (var y = 0; y < gridHeight; y++) {
-        newTable += '<td></td>';
+    createCanvas(gridWidth, gridHeight);
+  }
+
+  /**
+   * @description Create canvas
+   * @param {int} width  Width of the canvas
+   * @param {int} height Height of th canvas
+   */
+  function createCanvas(width, height) {
+    if ((width > 0) && (height > 0)) {
+      var newRow, newCell;
+      var table = $(gridTable)[0];
+
+      for (var x = 0; x < width; x++) {
+        newRow = table.insertRow(-1);
+        for (var y = 0; y < height; y++) {
+          newCell = newRow.insertCell(-1);
+        }
       }
-      newTable += '</tr>';
+      
+      return true;
     }
-    gridTable.append(newTable);
+
+    return false;
   }
 
   function plotPixel() {
@@ -55,11 +72,14 @@
 
   function updatePixel(e) {
     debug('updatePixel');
+
     e.stopPropagation();
+
     if (e.which === 1) {
       debug('e.which === 1');
       plotPixel.call(this);
     }
+
     if (e.which === 3) {
       debug('e.which === 3');
       var tempColor = pixelColor;
@@ -68,6 +88,7 @@
       pixelColor = tempColor;
       return false;
     }
+
     return true;
   }
 
@@ -75,8 +96,8 @@
     $('#pixel_canvas td').toggleClass('toggle-grid');
   }
 
-  function removeCanvas() {
-    gridTable.empty();
+  function removeCanvas(table) {
+    $(table).empty();
   }
 
   function clearCanvas() {

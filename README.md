@@ -18,4 +18,4 @@ TODO :
 - [x] Add _eraser_ functionality
 - [ ] Make functions responsible for one thing 
 - [ ] Allow user to paint instead of clcking each pixel
-- [ ] Re-write table creation function to use HTMLTableElement function
+- [x] Re-write table creation function to use HTMLTableElement function
