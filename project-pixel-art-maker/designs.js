@@ -5,7 +5,7 @@
   var DEBUG = true;
 
   var pixelColor = '#000'; // default pixel color is black
-  var gridTable = '#pixel_canvas';
+  var gridTable = '#pixel_canvas'; // if of the table/canvas
 
   /**
    * @description Print debug to console
@@ -53,7 +53,7 @@
           newCell = newRow.insertCell(-1);
         }
       }
-      
+
       return true;
     }
 
