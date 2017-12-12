@@ -6,6 +6,7 @@
 
   var pixelColor = '#000'; // default pixel color is black
   var gridTable = '#pixel_canvas'; // if of the table/canvas
+  var isPainting = false; // flag to start/stop painting pixels
 
   /**
    * @description Print debug to console
@@ -27,7 +28,6 @@
 
     var gridHeight = 0;
     var gridWidth = 0;
-    // var newTable = '';
 
     removeCanvas(gridTable);
 
@@ -60,6 +60,27 @@
     return false;
   }
 
+  /**
+   * @description update pixel with correct color or clear it
+   * @param {string} e event 
+   */
+  function updatePixel(e) {
+    isPainting = true;
+    if (e.which === 1) {
+      plotPixel.call(this);
+    }
+
+    if (isPainting && e.which === 3) {
+      debug('clear');
+      var tempColor = pixelColor;
+      pixelColor = '#fff';
+      plotPixel.call(this);
+      pixelColor = tempColor;
+      return false;
+    }
+
+  }
+
   function plotPixel() {
     debug('plotPixel');
     $(this).css('background', pixelColor);
@@ -68,28 +89,6 @@
   function updatePixelColor() {
     debug('updatePixelColor');
     pixelColor = $('#colorPicker').val();
-  }
-
-  function updatePixel(e) {
-    debug('updatePixel');
-
-    e.stopPropagation();
-
-    if (e.which === 1) {
-      debug('e.which === 1');
-      plotPixel.call(this);
-    }
-
-    if (e.which === 3) {
-      debug('e.which === 3');
-      var tempColor = pixelColor;
-      pixelColor = '#fff';
-      plotPixel.call(this);
-      pixelColor = tempColor;
-      return false;
-    }
-
-    return true;
   }
 
   function toggleBorder() {
@@ -105,15 +104,23 @@
   }
 
   function startApplication() {
+    debug('startApplication');
+
     // Disable right-click context-menu
     document.oncontextmenu = function () {
       return false;
     };
 
     // Events
-    debug('startApplication');
+    $(document).mouseup(function () {
+      isPainting = false;
+    });
+
+    $('#pixel_canvas').on('mousedown', 'td', updatePixel);
+
+    $('#pixel_canvas').on('mouseover', 'td', updatePixel);
+
     $('#sizePicker').submit(makeGrid);
-    $(gridTable).on('mousedown', 'td', updatePixel);
     $('#colorPicker').on('change', updatePixelColor);
     $('#toggle_grid').on('click', toggleBorder);
     $('#clear_canvas').on('click', clearCanvas);
