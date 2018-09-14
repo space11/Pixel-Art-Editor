@@ -4,9 +4,9 @@
   // set true to show debug messages.
   var DEBUG = true;
 
-  var pixelColor = '#000'; // default pixel color is black
-  var gridTable = '#pixel_canvas'; // if of the table/canvas
-  var isPainting = false; // flag to start/stop painting pixels
+  let pixelColor = '#000'; // default pixel color is black
+  let gridTable = '#pixelCanvas'; // if of the table/canvas
+  let isPainting = false; // flag to start/stop painting pixels
 
   /**
    * @description Print debug to console
@@ -23,16 +23,13 @@
    * @param {string} e - Events
    */
   function makeGrid(e) {
-    debug('makeGrid');
     e.preventDefault();
+    debug('makeGrid');
 
-    var gridHeight = 0;
-    var gridWidth = 0;
+    const gridHeight = $('#input_height').val();
+    const gridWidth = $('#input_width').val();
 
-    removeCanvas(gridTable);
-
-    gridHeight = $('#input_height').val();
-    gridWidth = $('#input_width').val();
+    $(gridTable).empty();
 
     createCanvas(gridWidth, gridHeight);
   }
@@ -43,21 +40,17 @@
    * @param {int} height Height of th canvas
    */
   function createCanvas(width, height) {
-    if ((width > 0) && (height > 0)) {
-      var newRow, newCell;
-      var table = $(gridTable)[0];
+    if (width > 0 && height > 0) {
+      let newRow;
+      let table = $(gridTable)[0];
 
       for (var x = 0; x < width; x++) {
         newRow = table.insertRow(-1);
         for (var y = 0; y < height; y++) {
-          newCell = newRow.insertCell(-1);
+          newRow.insertCell(-1);
         }
       }
-
-      return true;
     }
-
-    return false;
   }
 
   /**
@@ -67,24 +60,21 @@
   function updatePixel(e) {
     isPainting = true;
     if (e.which === 1) {
-      plotPixel.call(this);
+      // plotPixel();
+      // plotPixel.call(this);
+      $(this).css('background', pixelColor);
     }
 
     if (isPainting && e.which === 3) {
       debug('clear');
       var tempColor = pixelColor;
       pixelColor = '#fff';
-      plotPixel.call(this);
+      $(this).css('background', pixelColor);
       pixelColor = tempColor;
-      return false;
     }
 
   }
 
-  function plotPixel() {
-    debug('plotPixel');
-    $(this).css('background', pixelColor);
-  }
 
   function updatePixelColor() {
     debug('updatePixelColor');
@@ -92,15 +82,12 @@
   }
 
   function toggleBorder() {
-    $('#pixel_canvas td').toggleClass('toggle-grid');
+    $('#pixelCanvas td').toggleClass('toggle-grid');
   }
 
-  function removeCanvas(table) {
-    $(table).empty();
-  }
 
   function clearCanvas() {
-    $('#pixel_canvas td').css('background-color', '#fff');
+    $('#pixelCanvas td').css('background-color', '#fff');
   }
 
   function startApplication() {
@@ -116,14 +103,14 @@
       isPainting = false;
     });
 
-    $('#pixel_canvas').on('mousedown', 'td', updatePixel);
+    $(gridTable).on('mousedown', 'td', updatePixel);
 
-    $('#pixel_canvas').on('mouseover', 'td', updatePixel);
+    $(gridTable).on('mouseover', 'td', updatePixel);
 
     $('#sizePicker').submit(makeGrid);
     $('#colorPicker').on('change', updatePixelColor);
-    $('#toggle_grid').on('click', toggleBorder);
-    $('#clear_canvas').on('click', clearCanvas);
+    $('#toggleGrid').on('click', toggleBorder);
+    $('#clearCanvas').on('click', clearCanvas);
   }
 
   startApplication();
